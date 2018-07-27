@@ -12,7 +12,21 @@
 
         <div v-for="vcard in vcardsData" class="card" v-bind="displayCardData(vcard)">
             <div class="card-header">
-                <h3>{{ name }}</h3>
+                <div class="float-left">
+                    <h3>{{ name }}</h3>
+                </div>
+                <div class="float-right d-flex">
+                    <div class="">
+                        <button class="bg-transparent btn btn-sm"><a :href="'/vcards/' + vcard.id + '/edit'"><i class="fas fa-pencil-alt text-info"></i></a></button>
+                    </div>
+                    <div class="">
+                        <form method="post" :action="'/vcards/' + vcard.id">
+                            <input type="hidden" name="_token" :value="csrf">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="bg-transparent btn btn-sm" type="submit"><i class="far fa-trash-alt text-danger"></i></button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <ul>  
