@@ -47374,7 +47374,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function(){},staticRenderFns:[]}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group card-body" }, [
+          _c(
+            "label",
+            { staticClass: "font-weight-bold", attrs: { for: "searchBox" } },
+            [_vm._v("Filter Contacts:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchString,
+                expression: "searchString"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              id: "searchBox",
+              type: "text",
+              placeholder: "Enter your search terms"
+            },
+            domProps: { value: _vm.searchString },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchString = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.vcardsData, function(vcard) {
+        return _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", [_vm._v(_vm._s(vcard.name_first))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm._v(
+              "\n            " + _vm._s(vcard.email_personal) + "\n        "
+            )
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("a", [_vm._v("+ Add new contact")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

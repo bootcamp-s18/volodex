@@ -12,7 +12,7 @@
 
         <div v-for="vcard in vcardsData" class="card">
             <div class="card-header">
-                <h3>{{ vcard.name_first }} 
+                <h3>{{ vcard.name_first }}</h3>
             </div>
             <div class="card-body">
                 {{ vcard.email_personal }}
