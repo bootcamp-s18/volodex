@@ -23,15 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $contacts = \App\Contact::where('user_id', '=', \Auth::user()->id)->get();
+        // $contacts = \App\Contact::where('user_id', '=', \Auth::user()->id)->get();
 
-        foreach($contacts as $contact)
-        {
-            $contact->vcardInfo = \App\Vcard::where('id', '=', $contact->vcard_id)->first();
-        }
+        // foreach($contacts as $contact)
+        // {
+        //     $contact->vcardInfo = \App\Vcard::where('id', '=', $contact->vcard_id)->first();
+        // }
 
         // dd($contacts);
 
-        return view('users.home', compact('contacts'));
+        return view('users.home');
     }
 }
