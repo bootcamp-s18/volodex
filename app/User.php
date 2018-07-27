@@ -9,6 +9,16 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+
+    public function vcards()
+   {
+       return $this->hasMany('App\Vcard');
+   }
+
+
+
+
+
     /**
      * The attributes that are mass assignable.
      *
