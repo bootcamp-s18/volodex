@@ -47353,7 +47353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['contactsData'],
+    props: ['vcardsData'],
     data: function data() {
         return {
             searchString: '',
@@ -47363,8 +47363,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('made it');
-        console.log(this.contactsData);
-        this.cData = this.contactsData;
+        console.log(this.vcardsData);
+        this.cData = this.vcardsData;
     },
 
     methods: {}
@@ -47420,21 +47420,15 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._l(_vm.cData, function(contact) {
+      _vm._l(_vm.vcardsData, function(vcard) {
         return _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(contact.vcardInfo.name_first) +
-                "\n        "
-            )
+            _c("h3", [_vm._v(_vm._s(vcard.name_first))])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _vm._v(
-              "\n            " +
-                _vm._s(contact.vcardInfo.email_personal) +
-                "                \n        "
+              "\n            " + _vm._s(vcard.email_personal) + "\n        "
             )
           ])
         ])

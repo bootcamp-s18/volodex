@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $contacts = \App\Contact::where('user_id', '=', \Auth::user()->id)->get();
+        $vcards = \App\Vcard::where('user_id', '=', \Auth::id())->get();
 
         // foreach($contacts as $contact)
         // {
@@ -32,6 +32,7 @@ class HomeController extends Controller
 
         // dd($contacts);
 
-        return view('users.home');
+        // dd($vcards);
+        return view('users.home', compact('vcards'));
     }
 }

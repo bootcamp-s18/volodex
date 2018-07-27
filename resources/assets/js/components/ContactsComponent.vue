@@ -10,12 +10,12 @@
             </div>
         </div>
 
-        <div v-for="contact in cData" class="card">
+        <div v-for="vcard in vcardsData" class="card">
             <div class="card-header">
-                {{ contact.vcardInfo.name_first }}
+                <h3>{{ vcard.name_first }}</h3>
             </div>
             <div class="card-body">
-                {{ contact.vcardInfo.email_personal }}                
+                {{ vcard.email_personal }}
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
 
 <script>
     export default {
-        props: ['contactsData'],
+        props: ['vcardsData'],
         data: () => ({
             searchString: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -31,8 +31,8 @@
         }), 
         mounted() {
             console.log('made it');
-            console.log(this.contactsData);
-            this.cData = this.contactsData;
+            console.log(this.vcardsData);
+            this.cData = this.vcardsData;
 
         },
         methods: {
