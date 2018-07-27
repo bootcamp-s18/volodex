@@ -10,12 +10,16 @@
             </div>
         </div>
 
-        <div v-for="vcard in vcardsData" class="card">
+        <div v-for="vcard in vcardsData" class="card" v-bind="displayCardData(vcard)">
             <div class="card-header">
-                <h3>{{ vcard.name_first }}</h3>
+                <h3>{{ name }}</h3>
             </div>
             <div class="card-body">
-                {{ vcard.email_personal }}
+                <ul>  
+                    <li v-if="item[1] != null" v-for="item in vcardAr">
+                        {{ item[0] + ' ' + item[1] }}    
+                    </li>   
+                </ul>
             </div>
         </div>
     </div>
@@ -27,7 +31,10 @@
         data: () => ({
             searchString: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            cData: null
+            cData: null,
+            vcardAr: null,
+            name: null,
+
         }), 
         mounted() {
             console.log('made it');
@@ -36,7 +43,24 @@
 
         },
         methods: {
-            
+            displayCardData: function (vcardData) {
+                // console.log(vcardData);
+                this.vcardAr = Object.entries(vcardData);
+                this.vcardAr.splice(0, 2); //to remove the id of the user and vcard
+                this.vcardAr.splice(this.vcardAr.length - 2, 2);
+
+                if(vcardData.name_middle != null)
+                {
+                    this.name = vcardData.name_first + ' ' + vcardData.name_middle + ' ' + vcardData.name_last;
+                }
+                else
+                {
+                    this.name = vcardData.name_first + ' ' + vcardData.name_last;
+                }
+                
+                this.vcardAr.splice(0,3); //to remove the first, middle, and last names         
+            }
+
         }
     }
 </script>

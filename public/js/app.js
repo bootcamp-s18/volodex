@@ -47351,6 +47351,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47358,7 +47362,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             searchString: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            cData: null
+            cData: null,
+            vcardAr: null,
+            name: null
+
         };
     },
     mounted: function mounted() {
@@ -47367,7 +47374,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.cData = this.vcardsData;
     },
 
-    methods: {}
+    methods: {
+        displayCardData: function displayCardData(vcardData) {
+            // console.log(vcardData);
+            this.vcardAr = Object.entries(vcardData);
+            this.vcardAr.splice(0, 2); //to remove the id of the user and vcard
+            this.vcardAr.splice(this.vcardAr.length - 2, 2);
+
+            if (vcardData.name_middle != null) {
+                this.name = vcardData.name_first + ' ' + vcardData.name_middle + ' ' + vcardData.name_last;
+            } else {
+                this.name = vcardData.name_first + ' ' + vcardData.name_last;
+            }
+
+            this.vcardAr.splice(0, 3); //to remove the first, middle, and last names         
+        }
+
+    }
 });
 
 /***/ }),
@@ -47421,17 +47444,37 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.vcardsData, function(vcard) {
-        return _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", [_vm._v(_vm._s(vcard.name_first))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v(
-              "\n            " + _vm._s(vcard.email_personal) + "\n        "
-            )
-          ])
-        ])
+        return _c(
+          "div",
+          _vm._b(
+            { staticClass: "card" },
+            "div",
+            _vm.displayCardData(vcard),
+            false
+          ),
+          [
+            _c("div", { staticClass: "card-header" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.name))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "ul",
+                _vm._l(_vm.vcardAr, function(item) {
+                  return item[1] != null
+                    ? _c("li", [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(item[0] + " " + item[1]) +
+                            "    \n                "
+                        )
+                      ])
+                    : _vm._e()
+                })
+              )
+            ])
+          ]
+        )
       })
     ],
     2
