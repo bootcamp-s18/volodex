@@ -10,12 +10,12 @@
             </div>
         </div>
 
-        <div v-for="contact in filteredContacts" class="card">
+        <div v-for="contact in cData" class="card">
             <div class="card-header">
-
+                {{ contact.vcardInfo.name_first }}
             </div>
             <div class="card-body">
-
+                {{ contact.vcardInfo.email_personal }}                
             </div>
         </div>
     </div>
@@ -23,8 +23,17 @@
 
 <script>
     export default {
+        props: ['contactsData'],
+        data: () => ({
+            searchString: '',
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            cData: null
+        }), 
         mounted() {
-            console.log('Component mounted.')
+            console.log('made it');
+            console.log(this.contactsData);
+            this.cData = this.contactsData;
+
         },
         methods: {
             
