@@ -13,16 +13,23 @@ class VcardsTableSeeder extends Seeder
      */
 
 
-    $aaron = \App\User::where('name', 'Aaron')->first();
-    $chris = \App\User::where('name', 'Chris')->first();
-    $erik = \App\User::where('name', 'Erik')->first();
+
 
 
 
     public function run()
     {
+
+
+        $aaron = \App\User::where('name', 'Aaron')->first();
+        $chris = \App\User::where('name', 'Chris')->first();
+        $erik = \App\User::where('name', 'Erik')->first();
+
+
+
+
         DB::table('vcards')->insert([
-            'user_id' => $erik;
+            'user_id' => $erik->id,
 
             'name_first' => 'Aaron',
             'name_last' => 'Carter',
@@ -41,7 +48,7 @@ class VcardsTableSeeder extends Seeder
         ]);
 
         DB::table('vcards')->insert([
-            'user_id' => $erik;
+            'user_id' => $erik->id,
 
             'name_first' => 'Robert',
             'name_middle' => 'Christopher',
@@ -62,7 +69,7 @@ class VcardsTableSeeder extends Seeder
 
 
         DB::table('vcards')->insert([
-            'user_id' => $chris;
+            'user_id' => $chris->id,
 
 
             'name_first' => 'Erik',
