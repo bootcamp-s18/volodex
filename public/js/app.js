@@ -47353,7 +47353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['contactsData'],
+    props: ['vcardsData'],
     data: function data() {
         return {
             searchString: '',
@@ -47363,8 +47363,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('made it');
-        console.log(this.contactsData);
-        this.cData = this.contactsData;
+        console.log(this.vcardsData);
+        this.cData = this.vcardsData;
     },
 
     methods: {}
@@ -47374,87 +47374,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("div", { staticClass: "card" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group card-body" }, [
-          _c(
-            "label",
-            { staticClass: "font-weight-bold", attrs: { for: "searchBox" } },
-            [_vm._v("Filter Contacts:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.searchString,
-                expression: "searchString"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              id: "searchBox",
-              type: "text",
-              placeholder: "Enter your search terms"
-            },
-            domProps: { value: _vm.searchString },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.searchString = $event.target.value
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.cData, function(contact) {
-        return _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(contact.vcardInfo.name_first) +
-                "\n        "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(contact.vcardInfo.email_personal) +
-                "                \n        "
-            )
-          ])
-        ])
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("a", [_vm._v("+ Add new contact")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function(){},staticRenderFns:[]}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
