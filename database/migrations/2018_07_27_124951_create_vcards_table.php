@@ -15,6 +15,10 @@ class CreateVcardsTable extends Migration
     {
         Schema::create('vcards', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->string('name_first');
             $table->string('name_middle')->nullable();
             $table->string('name_last');
