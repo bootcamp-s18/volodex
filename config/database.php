@@ -1,14 +1,14 @@
 <?php
 
-return [
+// For Postgres on Heroku
+$url = parse_url(getenv("DATABASE_URL"));
+$dbhost = $url['host'];
+$dbuser = $url['user'];
+$dbpass = $url['pass'];
+$dbport = $url['port'];
+$dbname = substr($url['path'], 1);
 
-    // For Postgres on Heroku
-    $url = parse_url(getenv("DATABASE_URL"));
-    $dbhost = $url['host'];
-    $dbuser = $url['user'];
-    $dbpass = $url['pass'];
-    $dbport = $url['port'];
-    $dbname = substr($url['path'], 1);
+return [
 
     /*
     |--------------------------------------------------------------------------
