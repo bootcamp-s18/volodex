@@ -77,7 +77,9 @@ class VcardsController extends Controller
      */
     public function show($id)
     {
-        //
+        $vcard = \App\Vcard::find($id);
+
+        return view('vcards.show', compact($vcard));
     }
 
     /**
