@@ -103,7 +103,7 @@ class VcardsController extends Controller
     public function destroy(Request $request, $id)
     {
         $vcard = \App\Vcard::find($id);
-        $vcard->delete;
+        $vcard->delete();
         $request->session()->flash('status', 'Contact deleted!');
         return redirect()->route('home');
     }

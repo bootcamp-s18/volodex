@@ -47539,7 +47539,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("a", [_vm._v("+ Add new contact")])
+      _c("a", { attrs: { href: "/vcards/create" } }, [
+        _vm._v("+ Add new contact")
+      ])
     ])
   },
   function() {
