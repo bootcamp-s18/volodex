@@ -167,12 +167,13 @@ class VcardsController extends Controller
         // add work data
         $vcard->addCompany($data->organization_name);
         $vcard->addJobtitle($data->organization_title);
-        $vcard->addEmail($data->email_personal);
-        $vcard->addPhoneNumber($data->phone_cell, 'PREF;HOME');
+        $vcard->addEmail($data->email_personal, 'HOME');
+        $vcard->addEmail($data->email_work, 'WORK');
+        $vcard->addPhoneNumber($data->phone_home, 'PREF;HOME');
+        $vcard->addPhoneNumber($data->phone_cell, 'CELL');
         $vcard->addPhoneNumber($data->phone_work, 'WORK');
-        // $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
-        // $vcard->addLabel('street, worktown, workpostcode Belgium');
-        // $vcard->addURL('http://www.jeroendesloovere.be');
+        $vcard->addAddress($data->address_home);
+        $vcard->addAddress($data->address_work);
         $vcard->save();
 
         \Mail::to('theerikwolfe@gmail.com')->send(new shareVcard($user));
