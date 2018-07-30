@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $vcards = \App\Vcard::where('user_id', '=', \Auth::id())->get();
+        $vcards = \App\Vcard::where('user_id', '=', \Auth::id())->orderBy('name_first', 'asc')->get();
 
         // foreach($contacts as $contact)
         // {
