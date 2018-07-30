@@ -7,7 +7,7 @@ This web application built using the Laravel PHP framework is for creating, stor
 ### Prerequisites
 
 npm:
-```json
+>```json
 "devDependencies": {
    "axios": "^0.18",
    "bootstrap": "^4.1.0",
@@ -21,7 +21,8 @@ npm:
 ```
 
 Composer:
-```json
+
+>```json
 "require": {
     "php": "^7.1.3",
     "fideloper/proxy": "^4.0",
