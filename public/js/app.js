@@ -47404,6 +47404,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47438,6 +47439,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        makeStringLookPretty: function makeStringLookPretty(word) {
+            word = word.replace('_', ' ');
+            word = word.split(" ");
+            for (var i = 0; i < word.length; i++) {
+                word[i] = word[i][0].toUpperCase() + word[i].substring(1);
+            }
+            return word.join(' ') + ': ';
+        },
         displayCardData: function displayCardData(vcardData) {
             // console.log(vcardData);
             this.vcardAr = Object.entries(vcardData);
@@ -47450,7 +47459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.name = vcardData.name_first + ' ' + vcardData.name_last;
             }
 
-            this.vcardAr.splice(0, 3); //to remove the first, middle, and last names         
+            this.vcardAr.splice(0, 3); //to remove the first, middle, and last names
         }
 
     }
@@ -47468,7 +47477,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card m-3" }, [
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "form-group card-body" }, [
@@ -47510,7 +47519,7 @@ var render = function() {
         return _c(
           "div",
           _vm._b(
-            { staticClass: "card" },
+            { staticClass: "card m-3" },
             "div",
             _vm.displayCardData(vcard),
             false
@@ -47522,10 +47531,18 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "float-right d-flex" }, [
-                _vm._m(1, true),
+                _c("div", [
+                  _c("button", { staticClass: "bg-transparent btn btn-sm" }, [
+                    _c(
+                      "a",
+                      { attrs: { href: "/vcards/download/" + vcard.id } },
+                      [_c("i", { staticClass: "text-primary fas fa-download" })]
+                    )
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", [
-                  _vm._m(2, true),
+                  _vm._m(1, true),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -47548,7 +47565,7 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "modal-content" }, [
-                            _vm._m(3, true),
+                            _vm._m(2, true),
                             _vm._v(" "),
                             _c(
                               "form",
@@ -47559,7 +47576,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _vm._m(4, true),
+                                _vm._m(3, true),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "modal-footer" }, [
                                   _c("input", {
@@ -47627,7 +47644,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(5, true)
+                      _vm._m(4, true)
                     ]
                   )
                 ])
@@ -47640,11 +47657,12 @@ var render = function() {
                 _vm._l(_vm.vcardAr, function(item) {
                   return item[1] != null
                     ? _c("li", [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item[0] + " " + item[1]) +
-                            "    \n                "
-                        )
+                        _c("strong", [
+                          _vm._v(
+                            " " + _vm._s(_vm.makeStringLookPretty(item[0]))
+                          )
+                        ]),
+                        _vm._v(" " + _vm._s(item[1]) + "\n                ")
                       ])
                     : _vm._e()
                 })
@@ -47665,16 +47683,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("a", { attrs: { href: "/vcards/create" } }, [
         _vm._v("+ Add new contact")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("a", { staticClass: "btn btn-sm bg-transparent" }, [
-        _c("i", { staticClass: "text-primary fas fa-download" })
       ])
     ])
   },

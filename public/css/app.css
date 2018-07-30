@@ -10472,12 +10472,32 @@ a.text-dark:focus {
 }
 
 .navbar-laravel {
-  background-color: #fff;
+  background-color: #43617D;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.dropdown-item {
+  color: #43617D !important;
+}
+
+nav a {
+  color: white !important;
+}
+
+body {
+  background-color: #b5d3db;
+}
+
 span {
   color: red;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.card-body {
+  background-color: #fff;
 }
 
