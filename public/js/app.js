@@ -47401,6 +47401,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47408,7 +47411,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             searchString: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            cData: null,
             vcardAr: null,
             name: null
 
@@ -47417,9 +47419,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         console.log('made it');
         console.log(this.vcardsData);
-        this.cData = this.vcardsData;
     },
 
+    computed: {
+        filteredVcards: function filteredVcards() {
+            var vcards_array = this.vcardsData;
+            console.log(this.searchString.toLowerCase());
+            var search_string = this.searchString.toLowerCase();
+            if (!search_string) {
+                return vcards_array;
+            }
+            vcards_array = vcards_array.filter(function (item) {
+                if (item.name_first.toLowerCase().indexOf(search_string) !== -1 || item.name_last.toLowerCase().indexOf(search_string) !== -1) {
+                    return item;
+                }
+            });
+            return vcards_array;
+        }
+    },
     methods: {
         displayCardData: function displayCardData(vcardData) {
             // console.log(vcardData);
@@ -47458,7 +47475,7 @@ var render = function() {
           _c(
             "label",
             { staticClass: "font-weight-bold", attrs: { for: "searchBox" } },
-            [_vm._v("Filter Contacts:")]
+            [_vm._v("Filter Contacts By First or Last Name:")]
           ),
           _vm._v(" "),
           _c("input", {
@@ -47474,7 +47491,7 @@ var render = function() {
             attrs: {
               id: "searchBox",
               type: "text",
-              placeholder: "Enter your search terms"
+              placeholder: "Enter first or last name"
             },
             domProps: { value: _vm.searchString },
             on: {
@@ -47489,7 +47506,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._l(_vm.vcardsData, function(vcard) {
+      _vm._l(_vm.filteredVcards, function(vcard) {
         return _c(
           "div",
           _vm._b(
@@ -47505,8 +47522,10 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "float-right d-flex" }, [
+                _vm._m(1, true),
+                _vm._v(" "),
                 _c("div", [
-                  _vm._m(1, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -47529,7 +47548,7 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "modal-content" }, [
-                            _vm._m(2, true),
+                            _vm._m(3, true),
                             _vm._v(" "),
                             _c(
                               "form",
@@ -47540,7 +47559,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _vm._m(3, true),
+                                _vm._m(4, true),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "modal-footer" }, [
                                   _c("input", {
@@ -47608,7 +47627,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(4, true)
+                      _vm._m(5, true)
                     ]
                   )
                 ])
@@ -47653,6 +47672,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("a", { staticClass: "btn btn-sm bg-transparent" }, [
+        _c("i", { staticClass: "text-primary fas fa-download" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "button",
       {
@@ -47663,7 +47692,7 @@ var staticRenderFns = [
           "data-target": "#shareModal"
         }
       },
-      [_c("i", { staticClass: "fas fa-share-square text-primary" })]
+      [_c("i", { staticClass: "fas fa-share-square text-success" })]
     )
   },
   function() {
