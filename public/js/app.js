@@ -47403,7 +47403,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47438,6 +47437,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        makeStringLookPretty: function makeStringLookPretty(word) {
+            word = word.replace('_', ' ');
+            word = word.split(" ");
+            for (var i = 0; i < word.length; i++) {
+                word[i] = word[i][0].toUpperCase() + word[i].substring(1);
+            }
+            return word.join(' ') + ': ';
+        },
         displayCardData: function displayCardData(vcardData) {
             // console.log(vcardData);
             this.vcardAr = Object.entries(vcardData);
@@ -47468,7 +47475,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card m-3" }, [
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "form-group card-body" }, [
@@ -47510,7 +47517,7 @@ var render = function() {
         return _c(
           "div",
           _vm._b(
-            { staticClass: "card" },
+            { staticClass: "card m-3" },
             "div",
             _vm.displayCardData(vcard),
             false
@@ -47640,11 +47647,12 @@ var render = function() {
                 _vm._l(_vm.vcardAr, function(item) {
                   return item[1] != null
                     ? _c("li", [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item[0] + " " + item[1]) +
-                            "    \n                "
-                        )
+                        _c("strong", [
+                          _vm._v(
+                            " " + _vm._s(_vm.makeStringLookPretty(item[0]))
+                          )
+                        ]),
+                        _vm._v(" " + _vm._s(item[1]) + "    \n                ")
                       ])
                     : _vm._e()
                 })

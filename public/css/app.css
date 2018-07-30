@@ -10481,3 +10481,7 @@ span {
   color: red;
 }
 
+ul {
+  list-style-type: none;
+}
+

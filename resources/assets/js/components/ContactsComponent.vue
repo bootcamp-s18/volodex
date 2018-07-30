@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="card">
+        <div class="card m-3">
             <div class="card-header">
                 <a href="/vcards/create">+ Add new contact</a>
             </div>
@@ -9,8 +9,7 @@
                 <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter first or last name" />
             </div>
         </div>
-
-        <div v-for="vcard in filteredVcards" class="card" v-bind="displayCardData(vcard)">
+        <div v-for="vcard in filteredVcards" class="card m-3" v-bind="displayCardData(vcard)">
             <div class="card-header">
                 <div class="float-left">
                     <h3>{{ name }}</h3>
@@ -66,7 +65,7 @@
             <div class="card-body">
                 <ul>  
                     <li v-if="item[1] != null" v-for="item in vcardAr">
-                        {{ item[0] + ' ' + item[1] }}    
+                        <strong> {{ makeStringLookPretty(item[0]) }}</strong> {{ item[1] }}    
                     </li>   
                 </ul>
             </div>
@@ -105,6 +104,16 @@
             }
         },
         methods: {
+            makeStringLookPretty: function (word) {
+                word = word.replace('_', ' ');
+                word = word.split(" ");
+                for(var i = 0; i < word.length; i++)
+                {
+                    word[i] = word[i][0].toUpperCase() + word[i].substring(1);
+                }
+                return word.join(' ') + ': ';
+
+            },
             displayCardData: function (vcardData) {
                 // console.log(vcardData);
                 this.vcardAr = Object.entries(vcardData);
