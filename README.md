@@ -6,6 +6,8 @@ This web application built using the Laravel PHP framework is for creating, stor
 
 ### Prerequisites
 
+npm:
+
 ```json
 "devDependencies": {
    "axios": "^0.18",
@@ -17,6 +19,17 @@ This web application built using the Laravel PHP framework is for creating, stor
    "popper.js": "^1.12",
    "vue": "^2.5.7"
 }
+```
+
+Composer:
+
+```
+"require": {
+    "php": "^7.1.3",
+    "fideloper/proxy": "^4.0",
+    "jeroendesloovere/vcard": "^1.7",
+    "laravel/framework": "5.6.*",
+    "laravel/tinker": "^1.0"
 ```
 
 ### Installation Instructions
