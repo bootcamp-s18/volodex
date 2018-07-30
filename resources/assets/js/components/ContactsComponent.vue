@@ -16,7 +16,9 @@
                 </div>
                 <div class="float-right d-flex">
                     <div>
-                        <a class="btn btn-sm bg-transparent"><i class="text-primary fas fa-download"></i></a>
+                        <button class="bg-transparent btn btn-sm">
+                            <a :href="'/vcards/download/' + vcard.id"><i class="text-primary fas fa-download"></i></a>
+                        </button>
                     </div>
                     <div>
                         <button type="button" class="btn btn-sm bg-transparent" data-toggle="modal" data-target="#shareModal">
@@ -33,12 +35,12 @@
                                     </div>
                                     <form method="post" :action="'/vcards/share/' + vcard.id">
                                         <div class="modal-body">
-                                            
+
                                             <div class="form-group">
                                                 <label for="share_email"></label>
                                                 <input type="email" class="form-control" name="share_email" id="share_email">
                                             </div>
-                                            
+
                                         </div>
                                         <div class="modal-footer">
                                             <input type="hidden" name="_token" :value="csrf">
@@ -63,10 +65,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <ul>  
+                <ul>
                     <li v-if="item[1] != null" v-for="item in vcardAr">
-                        <strong> {{ makeStringLookPretty(item[0]) }}</strong> {{ item[1] }}    
-                    </li>   
+                        <strong> {{ makeStringLookPretty(item[0]) }}</strong> {{ item[1] }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -82,7 +84,7 @@
             vcardAr: null,
             name: null,
 
-        }), 
+        }),
         mounted() {
             console.log('made it');
             console.log(this.vcardsData);
@@ -96,7 +98,7 @@
                     return vcards_array;
                 }
                 vcards_array = vcards_array.filter(function(item) {
-                    if(item.name_first.toLowerCase().indexOf(search_string) !== -1 || item.name_last.toLowerCase().indexOf(search_string) !== -1) {
+                    if (item.name_first.toLowerCase().indexOf(search_string) !== -1 || item.name_last.toLowerCase().indexOf(search_string) !== -1) {
                         return item;
                     }
                 });
@@ -104,32 +106,28 @@
             }
         },
         methods: {
-            makeStringLookPretty: function (word) {
+            makeStringLookPretty: function(word) {
                 word = word.replace('_', ' ');
                 word = word.split(" ");
-                for(var i = 0; i < word.length; i++)
-                {
+                for (var i = 0; i < word.length; i++) {
                     word[i] = word[i][0].toUpperCase() + word[i].substring(1);
                 }
                 return word.join(' ') + ': ';
 
             },
-            displayCardData: function (vcardData) {
+            displayCardData: function(vcardData) {
                 // console.log(vcardData);
                 this.vcardAr = Object.entries(vcardData);
                 this.vcardAr.splice(0, 2); //to remove the id of the user and vcard
                 this.vcardAr.splice(this.vcardAr.length - 2, 2);
 
-                if(vcardData.name_middle != null)
-                {
+                if (vcardData.name_middle != null) {
                     this.name = vcardData.name_first + ' ' + vcardData.name_middle + ' ' + vcardData.name_last;
-                }
-                else
-                {
+                } else {
                     this.name = vcardData.name_first + ' ' + vcardData.name_last;
                 }
-                
-                this.vcardAr.splice(0,3); //to remove the first, middle, and last names         
+
+                this.vcardAr.splice(0, 3); //to remove the first, middle, and last names
             }
 
         }
