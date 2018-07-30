@@ -66,7 +66,7 @@
             <div class="card-body">
                 <ul>  
                     <li v-if="item[1] != null" v-for="item in vcardAr">
-                        {{ item[0] + ' ' + item[1] }}    
+                        <strong> {{ makeStringLookPretty(item[0]) }}</strong> {{ item[1] }}    
                     </li>   
                 </ul>
             </div>
@@ -105,6 +105,16 @@
             }
         },
         methods: {
+            makeStringLookPretty: function (word) {
+                word = word.replace('_', ' ');
+                word = word.split(" ");
+                for(var i = 0; i < word.length; i++)
+                {
+                    word[i] = word[i][0].toUpperCase() + word[i].substring(1);
+                }
+                return word.join(' ') + ': ';
+
+            },
             displayCardData: function (vcardData) {
                 // console.log(vcardData);
                 this.vcardAr = Object.entries(vcardData);

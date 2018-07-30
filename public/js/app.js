@@ -47438,6 +47438,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        makeStringLookPretty: function makeStringLookPretty(word) {
+            word = word.replace('_', ' ');
+            word = word.split(" ");
+            for (var i = 0; i < word.length; i++) {
+                word[i] = word[i][0].toUpperCase() + word[i].substring(1);
+            }
+            return word.join(' ') + ': ';
+        },
         displayCardData: function displayCardData(vcardData) {
             // console.log(vcardData);
             this.vcardAr = Object.entries(vcardData);
@@ -47640,11 +47648,12 @@ var render = function() {
                 _vm._l(_vm.vcardAr, function(item) {
                   return item[1] != null
                     ? _c("li", [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item[0] + " " + item[1]) +
-                            "    \n                "
-                        )
+                        _c("strong", [
+                          _vm._v(
+                            " " + _vm._s(_vm.makeStringLookPretty(item[0]))
+                          )
+                        ]),
+                        _vm._v(" " + _vm._s(item[1]) + "    \n                ")
                       ])
                     : _vm._e()
                 })
