@@ -177,10 +177,13 @@ class VcardsController extends Controller
 
         \Mail::to('theerikwolfe@gmail.com')->send(new shareVcard($user));
 
+        $file= glob('*.vcf')[0];
+        $filename = public_path().'/'.$file;
+        unlink($filename);
+
         $request->session()->flash('status', 'Vcard shared!');
         return redirect()->route('home');
 
     }
-
 
 }
