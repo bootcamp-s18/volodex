@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Storage;
 
 class shareVcard extends Mailable
 {
@@ -33,7 +34,8 @@ class shareVcard extends Mailable
      */
     public function build()
     {
-        return $this->view('shareVcard')
-            ->attachData($this->pdf, 'name.pdf',);
+        // dd('public/'.glob('*.vcf')[0]);
+        return $this->view('shareVcard')->attach(glob('*.vcf')[0]);
+
     }
 }

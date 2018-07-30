@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use \App\Mail\shareVcard;
 
+use JeroenDesloovere\VCard\VCard;
+
+use Illuminate\Support\Facades\Storage;
+
 class VcardsController extends Controller
 {
     /**
@@ -147,10 +151,29 @@ class VcardsController extends Controller
         return redirect()->route('home');
     }
 
+
     public function share(Request $request, $id)
     {
         // $email = $request->email;
         $user = \Auth::user()->name;
+        $vcard = new Vcard();
+        $data = \App\Vcard::find($id);
+        // dd($data);
+
+        // add personal data
+        $vcard->addName($data->name_last, $data->name_first, $data->name_middle);
+
+
+        // add work data
+        $vcard->addCompany($data->organization_name);
+        $vcard->addJobtitle($data->organization_title);
+        $vcard->addEmail($data->email_personal);
+        $vcard->addPhoneNumber($data->phone_cell, 'PREF;HOME');
+        $vcard->addPhoneNumber($data->phone_work, 'WORK');
+        // $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
+        // $vcard->addLabel('street, worktown, workpostcode Belgium');
+        // $vcard->addURL('http://www.jeroendesloovere.be');
+        $vcard->save();
 
         \Mail::to('theerikwolfe@gmail.com')->send(new shareVcard($user));
 
@@ -158,4 +181,6 @@ class VcardsController extends Controller
         return redirect()->route('home');
 
     }
+
+
 }
