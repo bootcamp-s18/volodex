@@ -5,20 +5,23 @@
                 <a href="/vcards/create">+ Add new contact</a>
             </div>
             <div class="form-group card-body">
-                <label for="searchBox" class="font-weight-bold">Filter Contacts:</label>
-                <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter your search terms" />
+                <label for="searchBox" class="font-weight-bold">Filter Contacts By First or Last Name:</label>
+                <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter first or last name" />
             </div>
         </div>
 
-        <div v-for="vcard in vcardsData" class="card" v-bind="displayCardData(vcard)">
+        <div v-for="vcard in filteredVcards" class="card" v-bind="displayCardData(vcard)">
             <div class="card-header">
                 <div class="float-left">
                     <h3>{{ name }}</h3>
                 </div>
                 <div class="float-right d-flex">
                     <div>
+                        <a class="btn btn-sm bg-transparent"><i class="text-primary fas fa-download"></i></a>
+                    </div>
+                    <div>
                         <button type="button" class="btn btn-sm bg-transparent" data-toggle="modal" data-target="#shareModal">
-                            <i class="fas fa-share-square text-primary"></i>
+                            <i class="fas fa-share-square text-success"></i>
                         </button>
                         <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -77,7 +80,6 @@
         data: () => ({
             searchString: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            cData: null,
             vcardAr: null,
             name: null,
 
@@ -85,8 +87,22 @@
         mounted() {
             console.log('made it');
             console.log(this.vcardsData);
-            this.cData = this.vcardsData;
-
+        },
+        computed: {
+            filteredVcards: function() {
+                var vcards_array = this.vcardsData;
+                console.log(this.searchString.toLowerCase());
+                var search_string = this.searchString.toLowerCase();
+                if (!search_string) {
+                    return vcards_array;
+                }
+                vcards_array = vcards_array.filter(function(item) {
+                    if(item.name_first.toLowerCase().indexOf(search_string) !== -1 || item.name_last.toLowerCase().indexOf(search_string) !== -1) {
+                        return item;
+                    }
+                });
+                return vcards_array;
+            }
         },
         methods: {
             displayCardData: function (vcardData) {
