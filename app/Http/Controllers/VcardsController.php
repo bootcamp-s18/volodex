@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use \App\Mail\shareVcard;
 
+use JeroenDesloovere\VCard\VCard;
+
+use Illuminate\Support\Facades\Storage;
+
 class VcardsController extends Controller
 {
     /**
@@ -147,16 +151,41 @@ class VcardsController extends Controller
         return redirect()->route('home');
     }
 
+
     public function share(Request $request, $id)
     {
         // dd($request->input('share_email'));
         // $email = $request->email;
         $user = \Auth::user()->name;
+        $vcard = new Vcard();
+        $data = \App\Vcard::find($id);
+        // dd($data);
+
+        // add personal data
+        $vcard->addName($data->name_last, $data->name_first, $data->name_middle);
+
+
+        // add work data
+        $vcard->addCompany($data->organization_name);
+        $vcard->addJobtitle($data->organization_title);
+        $vcard->addEmail($data->email_personal, 'HOME');
+        $vcard->addEmail($data->email_work, 'WORK');
+        $vcard->addPhoneNumber($data->phone_home, 'PREF;HOME');
+        $vcard->addPhoneNumber($data->phone_cell, 'CELL');
+        $vcard->addPhoneNumber($data->phone_work, 'WORK');
+        $vcard->addAddress($data->address_home);
+        $vcard->addAddress($data->address_work);
+        $vcard->save();
 
         \Mail::to($request->input('share_email'))->send(new shareVcard($user));
+
+        $file= glob('*.vcf')[0];
+        $filename = public_path().'/'.$file;
+        unlink($filename);
 
         $request->session()->flash('status', 'Vcard shared!');
         return redirect()->route('home');
 
     }
+
 }
