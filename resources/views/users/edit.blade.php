@@ -6,7 +6,7 @@
     @method('PUT')
 
     <div class="form-group">
-        <label for="name_first">First Name</label>
+        <label for="name_first"><span>*</span> First Name</label>
         <input type="text" class="form-control" name="name_first" id="name_first" value="{{ $vcard->name_first }}">
     </div>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="form-group">
-        <label for="name_last">Last Name</label>
+        <label for="name_last"><span>*</span> Last Name</label>
         <input type="text" class="form-control" id="name_last" name="name_last" value="{{ $vcard->name_last }}">
     </div>
 
