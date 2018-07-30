@@ -21,4 +21,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/vcards', 'VcardsController');
 
-Route::get('/vcards/share/{id}', 'VcardsController@share');
+Route::post('/vcards/share/{id}', 'VcardsController@share');

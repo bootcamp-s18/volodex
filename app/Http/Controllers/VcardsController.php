@@ -149,10 +149,11 @@ class VcardsController extends Controller
 
     public function share(Request $request, $id)
     {
+        // dd($request->input('share_email'));
         // $email = $request->email;
         $user = \Auth::user()->name;
 
-        \Mail::to('theerikwolfe@gmail.com')->send(new shareVcard($user));
+        \Mail::to($request->input('share_email'))->send(new shareVcard($user));
 
         $request->session()->flash('status', 'Vcard shared!');
         return redirect()->route('home');

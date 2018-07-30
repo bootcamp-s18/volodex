@@ -33,7 +33,6 @@ class shareVcard extends Mailable
      */
     public function build()
     {
-        return $this->view('shareVcard')
-            ->attachData($this->pdf, 'name.pdf',);
+        return $this->view('shareVcard');
     }
 }
