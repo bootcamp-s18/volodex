@@ -1,1 +1,1 @@
-<h1> Share this mf'ing Vcard</h1>
+<h1> {{ $user }} sent you a contact!</h1>
