@@ -16,6 +16,38 @@
                     <h3>{{ name }}</h3>
                 </div>
                 <div class="float-right d-flex">
+                    <div>
+                        <button type="button" class="btn btn-sm bg-transparent" data-toggle="modal" data-target="#shareModal">
+                            <i class="fas fa-share-square text-primary"></i>
+                        </button>
+                        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="shareModalLabel">Enter Email</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" :action="'/vcards/share/' + vcard.id">
+                                        <div class="modal-body">
+                                            
+                                            <div class="form-group">
+                                                <label for="share_email"></label>
+                                                <input type="email" class="form-control" name="share_email" id="share_email">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="_token" :value="csrf">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Send</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="">
                         <button class="bg-transparent btn btn-sm"><a :href="'/vcards/' + vcard.id + '/edit'"><i class="fas fa-pencil-alt text-info"></i></a></button>
                     </div>

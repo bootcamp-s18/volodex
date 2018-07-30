@@ -154,6 +154,7 @@ class VcardsController extends Controller
 
     public function share(Request $request, $id)
     {
+        // dd($request->input('share_email'));
         // $email = $request->email;
         $user = \Auth::user()->name;
         $vcard = new Vcard();
@@ -176,7 +177,7 @@ class VcardsController extends Controller
         $vcard->addAddress($data->address_work);
         $vcard->save();
 
-        \Mail::to('theerikwolfe@gmail.com')->send(new shareVcard($user));
+        \Mail::to($request->input('share_email'))->send(new shareVcard($user));
 
         $file= glob('*.vcf')[0];
         $filename = public_path().'/'.$file;

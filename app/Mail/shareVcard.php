@@ -34,8 +34,6 @@ class shareVcard extends Mailable
      */
     public function build()
     {
-        // dd('public/'.glob('*.vcf')[0]);
         return $this->view('shareVcard')->attach(glob('*.vcf')[0]);
-
     }
 }

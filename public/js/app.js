@@ -47369,6 +47369,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47473,6 +47505,79 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "float-right d-flex" }, [
+                _c("div", [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "shareModal",
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-labelledby": "shareModalLabel",
+                        "aria-hidden": "true"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog",
+                          attrs: { role: "document" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _c(
+                              "form",
+                              {
+                                attrs: {
+                                  method: "post",
+                                  action: "/vcards/share/" + vcard.id
+                                }
+                              },
+                              [
+                                _vm._m(3, true),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "modal-footer" }, [
+                                  _c("input", {
+                                    attrs: { type: "hidden", name: "_token" },
+                                    domProps: { value: _vm.csrf }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-secondary",
+                                      attrs: {
+                                        type: "button",
+                                        "data-dismiss": "modal"
+                                      }
+                                    },
+                                    [_vm._v("Close")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      attrs: { type: "submit" }
+                                    },
+                                    [_vm._v("Send")]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
                 _c("div", {}, [
                   _c("button", { staticClass: "bg-transparent btn btn-sm" }, [
                     _c(
@@ -47503,7 +47608,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _vm._m(4, true)
                     ]
                   )
                 ])
@@ -47541,6 +47646,63 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("a", { attrs: { href: "/vcards/create" } }, [
         _vm._v("+ Add new contact")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-sm bg-transparent",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#shareModal"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-share-square text-primary" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "shareModalLabel" } },
+        [_vm._v("Enter Email")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "share_email" } }),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "email", name: "share_email", id: "share_email" }
+        })
       ])
     ])
   },
