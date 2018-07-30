@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use \App\Mail\shareVcard;
+
 class VcardsController extends Controller
 {
     /**
@@ -143,5 +145,17 @@ class VcardsController extends Controller
         $vcard->delete();
         $request->session()->flash('status', 'Contact deleted!');
         return redirect()->route('home');
+    }
+
+    public function share(Request $request, $id)
+    {
+        // $email = $request->email;
+        $user = \Auth::user()->name;
+
+        \Mail::to('theerikwolfe@gmail.com')->send(new shareVcard($user));
+
+        $request->session()->flash('status', 'Vcard shared!');
+        return redirect()->route('home');
+
     }
 }
