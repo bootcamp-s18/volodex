@@ -73,7 +73,25 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li class="individual-error">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+            
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

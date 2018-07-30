@@ -23,7 +23,8 @@ class VcardsController extends Controller
      */
     public function create()
     {
-        //
+        // dd('made it');
+        return view('users.create');
     }
 
     /**
@@ -34,7 +35,29 @@ class VcardsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name_first' => 'required',
+            'name_last' => 'required'
+        ]);
+        $input = $request->input();
+        $vcard = new \App\Vcard;
+        $vcard->user_id = \Auth::id();
+        $vcard->name_first = $input['name_first'];
+        $vcard->name_middle = $input['name_middle'];
+        $vcard->name_last = $input['name_last'];
+        $vcard->organization_name = $input['organization_name'];
+        $vcard->organization_title = $input['organization_title'];
+        $vcard->phone_home = $input['phone_home'];
+        $vcard->phone_work = $input['phone_work'];
+        $vcard->phone_cell = $input['phone_cell'];
+        $vcard->address_work = $input['address_work'];
+        $vcard->address_home = $input['address_home'];
+        $vcard->email_personal = $input['email_personal'];
+        $vcard->email_work = $input['email_work'];
+        $request->session()->flash('status', 'Contact created!');
+        $vcard->save();
+        return redirect()->route('home');
+
     }
 
     /**
@@ -56,7 +79,24 @@ class VcardsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vcard = \App\Vcard::find($id);
+        if (old('_token'))
+        {
+            $vcard->name_first = old('name_first');
+            $vcard->name_middle = old('name_middle');
+            $vcard->name_last = old('name_last');
+            $vcard->organization_name = old('organization_name');
+            $vcard->organization_title = old('organization_title');
+            $vcard->phone_home = old('phone_home');
+            $vcard->phone_work = old('phone_work');
+            $vcard->phone_cell = old('phone_cell');
+            $vcard->address_work = old('address_work');
+            $vcard->address_home = old('address_home');
+            $vcard->email_personal = old('email_personal');
+            $vcard->email_work = old('email_work');
+        }
+
+        return view('users.edit', compact('vcard'));
     }
 
     /**
@@ -68,7 +108,27 @@ class VcardsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name_first' => 'required',
+            'name_last' => 'required'
+        ]);
+        $input = $request->input();
+        $vcard = \App\Vcard::find($id);
+        $vcard->name_first = $input['name_first'];
+        $vcard->name_middle = $input['name_middle'];
+        $vcard->name_last = $input['name_last'];
+        $vcard->organization_name = $input['organization_name'];
+        $vcard->organization_title = $input['organization_title'];
+        $vcard->phone_home = $input['phone_home'];
+        $vcard->phone_work = $input['phone_work'];
+        $vcard->phone_cell = $input['phone_cell'];
+        $vcard->address_work = $input['address_work'];
+        $vcard->address_home = $input['address_home'];
+        $vcard->email_personal = $input['email_personal'];
+        $vcard->email_work = $input['email_work'];
+        $request->session()->flash('status', 'Contact updated!');
+        $vcard->save();
+        return redirect()->route('home');
     }
 
     /**
@@ -77,8 +137,11 @@ class VcardsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $vcard = \App\Vcard::find($id);
+        $vcard->delete();
+        $request->session()->flash('status', 'Contact deleted!');
+        return redirect()->route('home');
     }
 }

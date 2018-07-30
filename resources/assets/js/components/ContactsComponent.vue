@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a>+ Add new contact</a>
+                <a href="/vcards/create">+ Add new contact</a>
             </div>
             <div class="form-group card-body">
                 <label for="searchBox" class="font-weight-bold">Filter Contacts:</label>
