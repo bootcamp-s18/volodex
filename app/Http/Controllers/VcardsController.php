@@ -188,4 +188,29 @@ class VcardsController extends Controller
 
     }
 
+    public function download(Request $request, $id)
+    {
+        $vcard = new Vcard();
+        $data = \App\Vcard::find($id);
+        // dd($data);
+
+        // add personal data
+        $vcard->addName($data->name_last, $data->name_first, $data->name_middle);
+
+        // add work data
+        $vcard->addCompany($data->organization_name);
+        $vcard->addJobtitle($data->organization_title);
+        $vcard->addEmail($data->email_personal, 'HOME');
+        $vcard->addEmail($data->email_work, 'WORK');
+        $vcard->addPhoneNumber($data->phone_home, 'PREF;HOME');
+        $vcard->addPhoneNumber($data->phone_cell, 'CELL');
+        $vcard->addPhoneNumber($data->phone_work, 'WORK');
+        $vcard->addAddress($data->address_home);
+        $vcard->addAddress($data->address_work);
+        $vcard->download();
+
+        return redirect()->route('home');
+
+    }
+
 }
