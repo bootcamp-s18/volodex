@@ -47403,7 +47403,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47476,7 +47475,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card m-3" }, [
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "form-group card-body" }, [
@@ -47518,7 +47517,7 @@ var render = function() {
         return _c(
           "div",
           _vm._b(
-            { staticClass: "card" },
+            { staticClass: "card m-3" },
             "div",
             _vm.displayCardData(vcard),
             false

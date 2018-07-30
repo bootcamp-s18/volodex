@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="card">
+        <div class="card m-3">
             <div class="card-header">
                 <a href="/vcards/create">+ Add new contact</a>
             </div>
@@ -9,8 +9,7 @@
                 <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter first or last name" />
             </div>
         </div>
-
-        <div v-for="vcard in filteredVcards" class="card" v-bind="displayCardData(vcard)">
+        <div v-for="vcard in filteredVcards" class="card m-3" v-bind="displayCardData(vcard)">
             <div class="card-header">
                 <div class="float-left">
                     <h3>{{ name }}</h3>
