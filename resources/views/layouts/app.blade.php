@@ -77,10 +77,11 @@
         </nav>
 
         <main class="py-4">
-            <div class="container">
+            <div class="">
+                <div class="container">
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
+                    <div class="alert alert-danger m-3">
+                        <ul class="mb-0 m-5">
                             @foreach ($errors->all() as $error)
                                 <li class="individual-error">{{ $error }}</li>
                             @endforeach
@@ -89,10 +90,11 @@
                 @endif
 
                 @if (session('status'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success m-3" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
+                </div>
 
                 @yield('content')
             </div>
