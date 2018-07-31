@@ -2,11 +2,31 @@
     <div class="container">
         <div class="card m-3">
             <div class="card-header">
-                <a href="/vcards/create">+ Add new contact</a>
+                <a class="float-left" href="/vcards/create">+ Add new contact</a>
+                <a class="float-right" href="" data-toggle="modal" data-target="#uploadModal">Upload vcard</a>
             </div>
             <div class="form-group card-body">
                 <label for="searchBox" class="font-weight-bold">Filter Contacts By First or Last Name:</label>
                 <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter first or last name" />
+            </div>
+            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/vcards/upload/" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="file" name="vcardupload" />
+                                <input type="submit" value=" Save " />
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div v-for="vcard in filteredVcards" class="card m-3" v-bind="displayCardData(vcard)">
@@ -116,7 +136,6 @@
 
             },
             displayCardData: function(vcardData) {
-                // console.log(vcardData);
                 this.vcardAr = Object.entries(vcardData);
                 this.vcardAr.splice(0, 2); //to remove the id of the user and vcard
                 this.vcardAr.splice(this.vcardAr.length - 2, 2);

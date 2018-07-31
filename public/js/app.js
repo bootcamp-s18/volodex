@@ -47405,6 +47405,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['vcardsData'],
@@ -47512,7 +47532,59 @@ var render = function() {
               }
             }
           })
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "uploadModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "uploadModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: {
+                          action: "/vcards/upload/",
+                          method: "POST",
+                          enctype: "multipart/form-data"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden", name: "_token" },
+                          domProps: { value: _vm.csrf }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "file", name: "vcardupload" }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "submit", value: " Save " }
+                        })
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
       _vm._l(_vm.filteredVcards, function(vcard) {
@@ -47542,7 +47614,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", [
-                  _vm._m(1, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -47565,7 +47637,7 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "modal-content" }, [
-                            _vm._m(2, true),
+                            _vm._m(3, true),
                             _vm._v(" "),
                             _c(
                               "form",
@@ -47576,7 +47648,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _vm._m(3, true),
+                                _vm._m(4, true),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "modal-footer" }, [
                                   _c("input", {
@@ -47644,7 +47716,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(4, true)
+                      _vm._m(5, true)
                     ]
                   )
                 ])
@@ -47681,9 +47753,49 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("a", { attrs: { href: "/vcards/create" } }, [
-        _vm._v("+ Add new contact")
-      ])
+      _c(
+        "a",
+        { staticClass: "float-left", attrs: { href: "/vcards/create" } },
+        [_vm._v("+ Add new contact")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "float-right",
+          attrs: {
+            href: "",
+            "data-toggle": "modal",
+            "data-target": "#uploadModal"
+          }
+        },
+        [_vm._v("Upload vcard")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "uploadModalLabel" } },
+        [_vm._v("Modal title")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
