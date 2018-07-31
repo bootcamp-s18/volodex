@@ -207,9 +207,9 @@ class VcardsController extends Controller
         $vcard->addPhoneNumber($data->phone_work, 'WORK');
         $vcard->addAddress($data->address_home);
         $vcard->addAddress($data->address_work);
-        $vcard->download();
+        return $vcard->download();
 
-        return redirect()->route('home');
+        // return redirect()->route('home');
 
     }
 
