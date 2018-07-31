@@ -47468,7 +47468,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return word.join(' ') + ': ';
         },
         displayCardData: function displayCardData(vcardData) {
-            // console.log(vcardData);
             this.vcardAr = Object.entries(vcardData);
             this.vcardAr.splice(0, 2); //to remove the id of the user and vcard
             this.vcardAr.splice(this.vcardAr.length - 2, 2);
@@ -47727,7 +47726,7 @@ var render = function() {
               _c(
                 "ul",
                 _vm._l(_vm.vcardAr, function(item) {
-                  return item[1] != null
+                  return item[1] != null && item[1] != ""
                     ? _c("li", [
                         _c("strong", [
                           _vm._v(
