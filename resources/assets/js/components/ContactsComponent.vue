@@ -86,7 +86,7 @@
             </div>
             <div class="card-body">
                 <ul>
-                    <li v-if="item[1] != null" v-for="item in vcardAr">
+                    <li v-if="item[1] != null && item[1] != ''" v-for="item in vcardAr">
                         <strong> {{ makeStringLookPretty(item[0]) }}</strong> {{ item[1] }}
                     </li>
                 </ul>

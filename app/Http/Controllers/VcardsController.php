@@ -213,25 +213,34 @@ class VcardsController extends Controller
 
     public function storeUpload(Request $request)
     {
-    
+
         $vcardString = file_get_contents($request->file('vcardupload'));
         $parser = new VCardParser($vcardString);
-        
+
         $parser = $parser->getCardAtIndex(0);
 
         $vcard = new \App\Vcard;
         $vcard->user_id = \Auth::id();
-        $vcard->name_first = $parser->firstname;
-        $vcard->name_last = $parser->lastname;
-        $vcard->organization_name = $parser->organization;
-        $vcard->organization_title = $parser->title;
-        $vcard->phone_home = $parser->phone["PREF;HOME"][0];
-        $vcard->phone_work = $parser->phone["WORK"][0];
-        $vcard->phone_cell = $parser->phone["CELL"][0];
-        $vcard->address_work = $parser->address["WORK;POSTAL"][0]->name;
-        $vcard->address_home = $parser->address["WORK;POSTAL"][1]->name;
-        $vcard->email_personal = $parser->email["INTERNET;HOME"][0];
-        $vcard->email_work = $parser->email["INTERNET;WORK"][0];
+        $vcard->name_first = ( array_key_exists ( 'firstname', $parser ) ?  $parser->firstname : null);
+        $vcard->name_last = ( array_key_exists ( 'lastname', $parser ) ? $parser->lastname : null);
+        $vcard->organization_name = ( array_key_exists ( 'organization', $parser ) ? $parser->organization : null);
+        $vcard->organization_title = ( array_key_exists ( 'title', $parser ) ? $parser->title : null);
+
+        if (array_key_exists( 'phone', $parser)) {
+            $vcard->phone_home = ( array_key_exists ( 'PREF;HOME', $parser->phone ) ? $parser->phone["PREF;HOME"][0] : null);
+            $vcard->phone_work = ( array_key_exists ( 'WORK', $parser->phone ) ? $parser->phone["WORK"][0] : null);
+            $vcard->phone_cell = ( array_key_exists ( 'CELL', $parser->phone ) ?  $parser->phone["CELL"][0] : null);
+        }
+
+        if (array_key_exists( 'address', $parser)) {
+            $vcard->address_work = ( array_key_exists ( 'name', $parser->address["WORK;POSTAL"][0] ) ? $parser->address["WORK;POSTAL"][0]->name : null);
+            $vcard->address_home = ( array_key_exists ( 'name', $parser->address["WORK;POSTAL"][1] ) ? $parser->address["WORK;POSTAL"][1]->name : null);
+        }
+        if (array_key_exists( 'email', $parser)) {
+            $vcard->email_personal = ( array_key_exists ( 'INTERNET;HOME', $parser->email ) ? $parser->email["INTERNET;HOME"][0] : null);
+            $vcard->email_work = ( array_key_exists ( 'INTERNET;WORK', $parser->email ) ? $parser->email["INTERNET;WORK"][0] : null);
+        }
+
         $request->session()->flash('status', 'Contact Uploaded!');
         $vcard->save();
 
