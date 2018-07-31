@@ -8,7 +8,11 @@ use \App\Mail\shareVcard;
 
 use JeroenDesloovere\VCard\VCard;
 
+use JeroenDesloovere\VCard\VCardParser;
+
 use Illuminate\Support\Facades\Storage;
+
+
 
 class VcardsController extends Controller
 {
@@ -154,12 +158,9 @@ class VcardsController extends Controller
 
     public function share(Request $request, $id)
     {
-        // dd($request->input('share_email'));
-        // $email = $request->email;
         $user = \Auth::user()->name;
         $vcard = new Vcard();
         $data = \App\Vcard::find($id);
-        // dd($data);
 
         // add personal data
         $vcard->addName($data->name_last, $data->name_first, $data->name_middle);
@@ -192,7 +193,6 @@ class VcardsController extends Controller
     {
         $vcard = new Vcard();
         $data = \App\Vcard::find($id);
-        // dd($data);
 
         // add personal data
         $vcard->addName($data->name_last, $data->name_first, $data->name_middle);
@@ -207,10 +207,35 @@ class VcardsController extends Controller
         $vcard->addPhoneNumber($data->phone_work, 'WORK');
         $vcard->addAddress($data->address_home);
         $vcard->addAddress($data->address_work);
-        $vcard->download();
+        return $vcard->download();
+
+    }
+
+    public function storeUpload(Request $request)
+    {
+    
+        $vcardString = file_get_contents($request->file('vcardupload'));
+        $parser = new VCardParser($vcardString);
+        
+        $parser = $parser->getCardAtIndex(0);
+
+        $vcard = new \App\Vcard;
+        $vcard->user_id = \Auth::id();
+        $vcard->name_first = $parser->firstname;
+        $vcard->name_last = $parser->lastname;
+        $vcard->organization_name = $parser->organization;
+        $vcard->organization_title = $parser->title;
+        $vcard->phone_home = $parser->phone["PREF;HOME"][0];
+        $vcard->phone_work = $parser->phone["WORK"][0];
+        $vcard->phone_cell = $parser->phone["CELL"][0];
+        $vcard->address_work = $parser->address["WORK;POSTAL"][0]->name;
+        $vcard->address_home = $parser->address["WORK;POSTAL"][1]->name;
+        $vcard->email_personal = $parser->email["INTERNET;HOME"][0];
+        $vcard->email_work = $parser->email["INTERNET;WORK"][0];
+        $request->session()->flash('status', 'Contact Uploaded!');
+        $vcard->save();
 
         return redirect()->route('home');
-
     }
 
 }

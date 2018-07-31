@@ -23,3 +23,4 @@ Route::resource('/vcards', 'VcardsController');
 
 Route::post('/vcards/share/{id}', 'VcardsController@share');
 Route::get('/vcards/download/{id}', 'VcardsController@download');
+Route::post('/vcards/upload', 'VcardsController@storeUpload');
